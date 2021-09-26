@@ -1,0 +1,26 @@
+#!/usr/bin/env ruby
+
+# frozen_string_literal: true
+
+require 'bundler'
+
+Bundler.require
+
+require 'json'
+require 'yaml'
+require 'date'
+require 'digest'
+require 'io/console'
+
+require 'progress'
+require 'kindle_highlights'
+require 'notion'
+require 'word_wrap/core_ext'
+
+Dotenv.load!
+
+require_relative 'lib/highlights'
+require_relative 'lib/notion_updater'
+require_relative 'lib/cli'
+
+Cli.new.run
