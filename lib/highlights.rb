@@ -15,14 +15,10 @@ class Highlights
     def search(keyword)
       keyword_regex = /#{keyword}/mi
 
-      all.reduce([]) do |acc, book|
+      all.each_with_object([]) do |book, acc|
         book['highlights'].each do |highlight|
-          if highlight['text'] =~ keyword_regex
-            acc << highlight.merge('author' => book['author'], 'book' => book['title'])
-          end
+          acc << highlight.merge('author' => book['author'], 'book' => book['title']) if highlight['text'] =~ keyword_regex
         end
-
-        acc
       end
     end
   end

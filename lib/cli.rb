@@ -1,54 +1,54 @@
 # frozen_string_literal: true
 
-class Cli
-  COMMANDS = %w(
+class Cli # rubocop:disable Metrics/ClassLength
+  COMMANDS = %w{
     sync_local
     update_notion
     search
     random
-  )
+  }.freeze
 
   BANNER = <<~TXT
-  Usage: notes <command> [<args>]
+    Usage: notes <command> [<args>]
 
-  COMMANDS
+    COMMANDS
 
-    sync_local
-      Updates the local database by importing notes and Kindle highlights
+      sync_local
+        Updates the local database by importing notes and Kindle highlights
 
-      --notes-only  Whether to import notes only. Default: false
+        --notes-only  Whether to import notes only. Default: false
 
-    update_notion
-      Imports the local database to Notion
+      update_notion
+        Imports the local database to Notion
 
-      --since  Import only database entries which have been updated since this date (ISO-8601)
+        --since  Import only database entries which have been updated since this date (ISO-8601)
 
-    search
-      Searches the local database
+      search
+        Searches the local database
 
-      --no-pager Don't use a pager.
+        --no-pager Don't use a pager.
 
-    random
-      Returns a random highlight
+      random
+        Returns a random highlight
 
-  GLOBAL FLAGS
+    GLOBAL FLAGS
   TXT
 
   def run
-    @global_opts = Optimist::options do
+    @global_opts = Optimist.options do
       banner BANNER
       stop_on COMMANDS
     end
 
     case ARGV.shift
     when 'sync_local'
-      sync_opts = Optimist::options do
+      sync_opts = Optimist.options do
         opt :notes_only, 'Only sync notes', default: false
       end
 
       sync_local(sync_opts)
     when 'update_notion'
-      update_opts = Optimist::options do
+      update_opts = Optimist.options do
         opt :since,
             'Only sync books with changes after the given date (iso8601)',
             type: Date,
@@ -57,7 +57,7 @@ class Cli
 
       update_notion(opts: update_opts)
     when 'search'
-      search_opts = Optimist::options do
+      search_opts = Optimist.options do
         opt :no_pager, 'Whether to use a pager', default: false
       end
 
@@ -65,7 +65,7 @@ class Cli
     when 'random'
       random
     else
-      Optimist::die "Unknown subcommand, expected one of {#{COMMANDS * ', '}}"
+      Optimist.die "Unknown subcommand, expected one of {#{COMMANDS * ', '}}"
     end
   end
 
@@ -76,7 +76,7 @@ class Cli
   def sync_local(opts)
     unless opts[:notes_only]
       puts 'Type password:'
-      password = IO::console.getpass
+      password = IO.console.getpass
     end
 
     highlights = Highlights.new(email: ENV.fetch('KINDLE_EMAIL'),
@@ -98,9 +98,9 @@ class Cli
     results = Highlights.search(keyword)
 
     output = <<~TXT
-    Found #{results.size} results for "#{keyword}"
+      Found #{results.size} results for "#{keyword}"
 
-    #{results.map { format(_1, keyword) }.join}
+      #{results.map { format(_1, keyword) }.join}
     TXT
 
     if results.size < 3 || opts[:no_pager]
@@ -109,7 +109,7 @@ class Cli
       return
     end
 
-    IO.popen(ENV.fetch('PAGER', 'less'), mode = 'w') do |io|
+    IO.popen(ENV.fetch('PAGER', 'less'), 'w') do |io|
       io.write output
       io.close
     end
@@ -125,12 +125,12 @@ class Cli
 
   def format(highlight, keyword = nil)
     <<~TEXT
-    ╔════════════════════════════════════════════════════════════════════╗
-    ║  Book:   #{truncate(highlight['book']).ljust(58)}║
-    ║  Author: #{highlight['author'].ljust(58)}║
-    ╚════════════════════════════════════════════════════════════════════╝
+      ╔════════════════════════════════════════════════════════════════════╗
+      ║  Book:   #{truncate(highlight['book']).ljust(58)}║
+      ║  Author: #{highlight['author'].ljust(58)}║
+      ╚════════════════════════════════════════════════════════════════════╝
 
-     #{colorize(highlight['text'], keyword).wrap 80}
+       #{colorize(highlight['text'], keyword).wrap 80}
 
     TEXT
   end

@@ -30,14 +30,14 @@ class NotionUpdater
 
   def already_imported?(highlight)
     !client.database_query(id: db_id, filter: {
-      property: 'ID',
-      text: {
-        equals: highlight['id']
-      }
-    })['results'].empty?
+                             property: 'ID',
+                             text: {
+                               equals: highlight['id']
+                             }
+                           })['results'].empty?
   end
 
-  def properties(book:, highlight:)
+  def properties(book:, highlight:) # rubocop:disable Metrics/MethodLength
     {
       Location: {
         number: highlight['location'].to_i
@@ -58,8 +58,8 @@ class NotionUpdater
       },
       Author: {
         rich_text: [
-            {
-              text: {
+          {
+            text: {
               content: book['author']
             }
           }
