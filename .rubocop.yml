@@ -4,6 +4,9 @@ AllCops:
   Exclude:
     - 'tmp/**/*'
 
+Bundler/OrderedGems:
+  Enabled: false
+
 Style/Documentation:
   Enabled: false
 
@@ -24,9 +27,6 @@ Layout/SpaceAroundMethodCallOperator:
 
 Layout/LineLength:
   Max: 126
-
-Rails/HelperInstanceVariable:
-  Enabled: false
 
 Metrics/ClassLength:
   Max: 100
@@ -72,33 +72,8 @@ Metrics/AbcSize:
 Metrics/BlockLength:
   Max: 100
 
-Rails/HasAndBelongsToMany:
-  Enabled: false
-
 Style/GlobalVars:
   Enabled: false
-
-# We want to use update_attribute and update_column sometimes
-Rails/SkipsModelValidations:
-  Enabled: false
-
-Rails/FilePath:
-  Enabled: false
-
-Rails/FindBy:
-  Enabled: false
-
-Rails/Blank:
-  Enabled: true
-
-Rails/OutputSafety:
-  Enabled: false
-
-Rails/LexicallyScopedActionFilter:
-  Enabled: false
-
-Rails/InverseOf:
-  Enabled: true
 
 Lint/ShadowedException:
   Enabled: false
@@ -149,12 +124,6 @@ Lint/CircularArgumentReference:
   Enabled: true
 
 Style/DateTime:
-  Enabled: false
-
-GitlabSecurity/PublicSend:
-  Enabled: false
-
-GitlabSecurity/JsonSerialization:
   Enabled: false
 
 Layout/EmptyLinesAroundAttributeAccessor:

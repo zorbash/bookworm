@@ -9,6 +9,7 @@ GEM
       zeitwerk (~> 2.3)
     addressable (2.8.0)
       public_suffix (>= 2.0.2, < 5.0)
+    ast (2.4.2)
     coderay (1.1.3)
     concurrent-ruby (1.1.9)
     connection_pool (2.2.5)
@@ -71,12 +72,30 @@ GEM
       faraday_middleware
       hashie
     optimist (3.0.1)
+    parallel (1.21.0)
+    parser (3.0.2.0)
+      ast (~> 2.4.1)
     progress (3.6.0)
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
     public_suffix (4.0.6)
     racc (1.5.2)
+    rainbow (3.0.0)
+    regexp_parser (2.1.1)
+    rexml (3.2.5)
+    rubocop (1.22.0)
+      parallel (~> 1.10)
+      parser (>= 3.0.0.0)
+      rainbow (>= 2.2.2, < 4.0)
+      regexp_parser (>= 1.8, < 3.0)
+      rexml
+      rubocop-ast (>= 1.12.0, < 2.0)
+      ruby-progressbar (~> 1.7)
+      unicode-display_width (>= 1.4.0, < 3.0)
+    rubocop-ast (1.12.0)
+      parser (>= 3.0.1.1)
+    ruby-progressbar (1.11.0)
     ruby2_keywords (0.0.5)
     rubyntlm (0.6.3)
     tzinfo (2.0.4)
@@ -84,6 +103,7 @@ GEM
     unf (0.1.4)
       unf_ext
     unf_ext (0.0.8)
+    unicode-display_width (2.1.0)
     webrick (1.7.0)
     webrobots (0.1.2)
     word_wrap (1.0.0)
@@ -100,6 +120,7 @@ DEPENDENCIES
   optimist (~> 3.0)
   progress (~> 3.6)
   pry
+  rubocop (~> 1.22)
   word_wrap (= 1.0.0)
 
 RUBY VERSION

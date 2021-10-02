@@ -12,3 +12,4 @@ gem 'notion-ruby-client', '~> 0.0.8'
 gem 'dotenv', '~> 2.7'
 
 gem 'pry', require: false
+gem 'rubocop', '~> 1.22', require: false
