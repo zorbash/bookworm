@@ -92,6 +92,8 @@ Such notes can be written in a `notes.yml` file (configurable via the
         the activity involved.
 ```
 
+A sample notes file can be found [here][notes-sample].
+
 Syncing all your Kindle highlights can take a couple of minutes. There's
 an option to sync only your notes with the `--notes-only` flag.
 
@@ -169,3 +171,4 @@ See [LICENSE](https://github.com/zorbash/bookworm/blob/master/LICENSE) for furth
 
 [notion-access]: https://developers.notion.com/docs/getting-started#share-a-database-with-your-integration
 [blogpost]:  https://zorbash.com/post/highlights-notes
+[notes-sample]: https://github.com/zorbash/notes/blob/main/notes.yml
