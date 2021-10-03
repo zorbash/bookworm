@@ -30,7 +30,11 @@ class Highlights
   end
 
   def sync(notes_only: false, **)
-    save(books_to_sync(notes_only: notes_only).with_progress('syncing books').map(&method(:serialize_book)))
+    books_to_sync(notes_only: notes_only).
+      with_progress('syncing books').
+      map(&method(:serialize_book)).
+      sort_by { |book| book[:asin] }.
+      then(&method(:save))
   end
 
   private
